@@ -1,11 +1,9 @@
 package com.wordpress.laaptu.dependencyinjection;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.wordpress.laaptu.dependencyinjection.db.DbManager;
+import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 import org.junit.After;
 import org.junit.Before;

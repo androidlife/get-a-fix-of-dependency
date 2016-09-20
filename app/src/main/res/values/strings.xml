@@ -12,4 +12,5 @@
 
   <string name="address">Address</string>
   <string name="phone">Phone</string>
+  <string name="id">id</string>
 </resources>

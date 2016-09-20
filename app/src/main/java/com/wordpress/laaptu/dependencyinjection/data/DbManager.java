@@ -1,4 +1,4 @@
-package com.wordpress.laaptu.dependencyinjection.db;
+package com.wordpress.laaptu.dependencyinjection.data;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,10 +1,8 @@
-package com.wordpress.laaptu.dependencyinjection.db;
+package com.wordpress.laaptu.dependencyinjection.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import static android.R.attr.key;
 
 /**
  * Created by laaptu on 9/20/16.

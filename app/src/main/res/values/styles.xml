@@ -1,11 +1,30 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-    </style>
+  <style name="EditFormStyle" parent="@style/AppTheme">
+    <item name="textInputLayoutStyle">@style/TextInputLayoutStyle</item>
+  </style>
+
+  <style name="ToolbarStyle" parent="@style/Base.Widget.AppCompat.Toolbar">
+    <item name="android:background">?attr/colorPrimary</item>
+    <item name="android:textColorPrimary">@color/white</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+
+
+
+
+  <style name="TextInputLayoutStyle" parent="@style/Widget.Design.TextInputLayout">
+    <item name="hintTextAppearance">@style/TextInputLayoutHintColor</item>
+    <item name="errorTextAppearance">@style/TextInputLayoutErrorColor</item>
+  </style>
+
+
+  <style name="TextInputLayoutHintColor" parent="@style/TextAppearance.AppCompat">
+    <item name="android:textColor">@color/primary</item>
+  </style>
+
+  <style name="TextInputLayoutErrorColor" parent="@style/TextAppearance.AppCompat">
+    <item name="android:textColor">#F44336</item>
+  </style>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.wordpress.laaptu.dependencyinjection.model;
 
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,7 +9,8 @@ import android.os.Parcelable;
 
 public class User implements Parcelable {
 
-  private int userId = 9;
+  private static final int USER_ID = 9;
+  private int userId = USER_ID;
   public String name, email, address, phone;
 
   public int getUserId() {
@@ -26,6 +28,23 @@ public class User implements Parcelable {
     user.address = "Koteshwor, Kathmandu";
     user.phone = "9801079923";
     return user;
+  }
+
+  /**
+   * Just one user to be stored
+   */
+  public static int getUniqueUserId() {
+    return USER_ID;
+  }
+
+  @Override public String toString() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(getUserId());
+    stringBuilder.append(name);
+    stringBuilder.append(email);
+    stringBuilder.append(phone);
+    stringBuilder.append(address);
+    return stringBuilder.toString();
   }
 
   protected User(Parcel in) {

@@ -24,8 +24,8 @@ public class FormEditFragment extends BaseFragment {
   EditText txtName, txtEmail, txtAddress, txtPhone;
   User user;
 
-  public static FormEditFragmentDb getInstance(Bundle params) {
-    FormEditFragmentDb fragment = new FormEditFragmentDb();
+  public static FormEditFragment getInstance(Bundle params) {
+    FormEditFragment fragment = new FormEditFragment();
     fragment.setArguments(params);
     return fragment;
   }

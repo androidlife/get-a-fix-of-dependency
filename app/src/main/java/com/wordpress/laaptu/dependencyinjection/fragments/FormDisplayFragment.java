@@ -25,8 +25,8 @@ public class FormDisplayFragment extends BaseFragment {
 
   }
 
-  public static FormDisplayFragmentDb getInstance(Bundle params) {
-    FormDisplayFragmentDb formDisplayFragmentDb = new FormDisplayFragmentDb();
+  public static FormDisplayFragment getInstance(Bundle params) {
+    FormDisplayFragment formDisplayFragmentDb = new FormDisplayFragment();
     formDisplayFragmentDb.setArguments(params);
     return formDisplayFragmentDb;
   }

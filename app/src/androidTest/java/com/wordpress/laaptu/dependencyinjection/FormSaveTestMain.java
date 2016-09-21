@@ -28,10 +28,10 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by laaptu on 9/21/16.
  */
-@RunWith(AndroidJUnit4.class) public class FormSaveTest {
+@RunWith(AndroidJUnit4.class) public class FormSaveTestMain {
 
-  @Rule public ActivityTestRule<MainActivityDb> mainActivityActivityTestRule =
-      new ActivityTestRule<>(MainActivityDb.class);
+  @Rule public ActivityTestRule<MainActivity> mainActivityActivityTestRule =
+      new ActivityTestRule<>(MainActivity.class);
 
   @Test public void editAndSaveTest() {
     onView(withId(R.id.menu_edit)).check(matches(isDisplayed()));

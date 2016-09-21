@@ -18,7 +18,7 @@ import com.wordpress.laaptu.dependencyinjection.widgets.EditFormTextInputLayout;
 /**
  */
 
-public class FormEditFragment extends BaseFragment {
+public class FormEditFragmentDb extends BaseFragment {
 
   EditFormTextInputLayout inputName, inputEmail, inputAddress, inputPhone;
   EditText txtName, txtEmail, txtAddress, txtPhone;

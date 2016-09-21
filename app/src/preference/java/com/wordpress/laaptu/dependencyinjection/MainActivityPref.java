@@ -1,19 +1,24 @@
 package com.wordpress.laaptu.dependencyinjection;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.squareup.otto.Subscribe;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
+import com.wordpress.laaptu.dependencyinjection.data.PrefManager;
 import com.wordpress.laaptu.dependencyinjection.events.BusProvider;
 import com.wordpress.laaptu.dependencyinjection.events.Events;
 import com.wordpress.laaptu.dependencyinjection.fragments.FormDisplayFragment;
+import com.wordpress.laaptu.dependencyinjection.fragments.FormDisplayFragmentPref;
 import com.wordpress.laaptu.dependencyinjection.fragments.FormEditFragment;
+import com.wordpress.laaptu.dependencyinjection.fragments.FormEditFragmentPref;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 
-public class MainActivity extends AppCompatActivity {
+import static com.wordpress.laaptu.dependencyinjection.model.User.getUser;
+
+public class MainActivityPref extends AppCompatActivity {
 
   Toolbar toolbar;
 
@@ -37,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void identifyState() {
-
     User user = getUser();
     if (user == null) {
       changeFragment(FragState.Edit);
@@ -52,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
     switch (fragState) {
       case Edit:
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.container, FormEditFragment.getInstance(null), FRAG_EDIT)
+            .replace(R.id.container, FormEditFragmentPref.getInstance(null), FRAG_EDIT)
             .commit();
         break;
       case Display:
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.container, FormDisplayFragment.getInstance(null), FRAG_DISPLAY)
+            .replace(R.id.container, FormDisplayFragmentPref.getInstance(null), FRAG_DISPLAY)
             .commit();
         break;
     }
@@ -107,6 +111,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private User getUser() {
-    return DbManager.getInstance(this).getUser();
+    return PrefManager.getInstance(this, PrefManager.PREF_NAME).getUser();
   }
 }

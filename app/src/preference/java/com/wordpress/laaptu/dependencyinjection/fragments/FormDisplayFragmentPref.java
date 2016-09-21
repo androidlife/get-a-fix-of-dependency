@@ -11,24 +11,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.wordpress.laaptu.dependencyinjection.R;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
+import com.wordpress.laaptu.dependencyinjection.data.PrefManager;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 
 /**
  */
 
-public class FormDisplayFragment extends BaseFragment {
+public class FormDisplayFragmentPref extends BaseFragment {
 
   private TextView infoText;
   private int titleStyle = R.style.DisplayTitleTextStyle, infoStyle = R.style.DisplayInfoTextStyle;
 
-  public FormDisplayFragment() {
+  public FormDisplayFragmentPref() {
 
   }
 
-  public static FormDisplayFragmentDb getInstance(Bundle params) {
-    FormDisplayFragmentDb formDisplayFragmentDb = new FormDisplayFragmentDb();
-    formDisplayFragmentDb.setArguments(params);
-    return formDisplayFragmentDb;
+  public static FormDisplayFragmentPref getInstance(Bundle params) {
+    FormDisplayFragmentPref formDisplayFragmentPref = new FormDisplayFragmentPref();
+    formDisplayFragmentPref.setArguments(params);
+    return formDisplayFragmentPref;
   }
 
   @Nullable @Override
@@ -66,6 +67,6 @@ public class FormDisplayFragment extends BaseFragment {
   }
 
   @Override public User getUser() {
-    return DbManager.getInstance(getContext()).getUser();
+    return PrefManager.getInstance(getContext(), PrefManager.PREF_NAME).getUser();
   }
 }

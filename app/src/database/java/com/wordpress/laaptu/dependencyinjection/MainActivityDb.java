@@ -1,7 +1,7 @@
 package com.wordpress.laaptu.dependencyinjection;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,16 +9,15 @@ import com.squareup.otto.Subscribe;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.events.BusProvider;
 import com.wordpress.laaptu.dependencyinjection.events.Events;
-import com.wordpress.laaptu.dependencyinjection.fragments.FormDisplayFragment;
-import com.wordpress.laaptu.dependencyinjection.fragments.FormEditFragment;
+import com.wordpress.laaptu.dependencyinjection.fragments.FormDisplayFragmentDb;
+import com.wordpress.laaptu.dependencyinjection.fragments.FormEditFragmentDb;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityDb extends AppCompatActivity {
 
   Toolbar toolbar;
 
-  private static final String FRAG_EDIT = "FormEditFragmentPref", FRAG_DISPLAY =
-      "FormDisplayFragmentPref";
+  private static final String FRAG_EDIT = "FormEditFragmentPref", FRAG_DISPLAY = "FormDisplayFragmentPref";
 
   public enum FragState {
     Edit, Display;
@@ -52,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
     switch (fragState) {
       case Edit:
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.container, FormEditFragment.getInstance(null), FRAG_EDIT)
+            .replace(R.id.container, FormEditFragmentDb.getInstance(null), FRAG_EDIT)
             .commit();
         break;
       case Display:
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.container, FormDisplayFragment.getInstance(null), FRAG_DISPLAY)
+            .replace(R.id.container, FormDisplayFragmentDb.getInstance(null), FRAG_DISPLAY)
             .commit();
         break;
     }
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     BusProvider.getEventBus().register(this);
   }
 
-  private User getUser() {
+  private User getUser(){
     return DbManager.getInstance(this).getUser();
   }
 }

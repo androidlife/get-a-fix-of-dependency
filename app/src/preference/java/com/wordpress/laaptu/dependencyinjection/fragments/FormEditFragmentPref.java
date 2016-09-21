@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.squareup.otto.Subscribe;
 import com.wordpress.laaptu.dependencyinjection.R;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
+import com.wordpress.laaptu.dependencyinjection.data.PrefManager;
 import com.wordpress.laaptu.dependencyinjection.events.Events;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 import com.wordpress.laaptu.dependencyinjection.widgets.EditFormTextInputLayout;
@@ -18,14 +19,14 @@ import com.wordpress.laaptu.dependencyinjection.widgets.EditFormTextInputLayout;
 /**
  */
 
-public class FormEditFragment extends BaseFragment {
+public class FormEditFragmentPref extends BaseFragment {
 
   EditFormTextInputLayout inputName, inputEmail, inputAddress, inputPhone;
   EditText txtName, txtEmail, txtAddress, txtPhone;
   User user;
 
-  public static FormEditFragmentDb getInstance(Bundle params) {
-    FormEditFragmentDb fragment = new FormEditFragmentDb();
+  public static FormEditFragmentPref getInstance(Bundle params) {
+    FormEditFragmentPref fragment = new FormEditFragmentPref();
     fragment.setArguments(params);
     return fragment;
   }
@@ -101,11 +102,11 @@ public class FormEditFragment extends BaseFragment {
   }
 
   private void saveNewUserInfo(User user) {
-    DbManager.getInstance(getContext()).storeUser(user);
+    PrefManager.getInstance(getContext(), PrefManager.PREF_NAME).storeUser(user);
     postEvent(new Events.EventToggle());
   }
 
   @Override public User getUser() {
-    return DbManager.getInstance(getContext()).getUser();
+    return PrefManager.getInstance(getContext(), PrefManager.PREF_NAME).getUser();
   }
 }

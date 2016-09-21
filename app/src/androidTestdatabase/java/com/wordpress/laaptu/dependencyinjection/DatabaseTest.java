@@ -20,8 +20,8 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class) public class DatabaseTest {
 
-  @Rule public ActivityTestRule<MainActivity> mainActivityActivityTestRule =
-      new ActivityTestRule<>(MainActivity.class);
+  @Rule public ActivityTestRule<MainActivityDb> mainActivityActivityTestRule =
+      new ActivityTestRule<>(MainActivityDb.class);
 
   private DbManager dbManager;
 

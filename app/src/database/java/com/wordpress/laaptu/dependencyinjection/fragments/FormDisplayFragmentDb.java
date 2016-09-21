@@ -16,12 +16,12 @@ import com.wordpress.laaptu.dependencyinjection.model.User;
 /**
  */
 
-public class FormDisplayFragment extends BaseFragment {
+public class FormDisplayFragmentDb extends BaseFragment {
 
   private TextView infoText;
   private int titleStyle = R.style.DisplayTitleTextStyle, infoStyle = R.style.DisplayInfoTextStyle;
 
-  public FormDisplayFragment() {
+  public FormDisplayFragmentDb() {
 
   }
 

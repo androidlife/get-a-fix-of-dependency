@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">DependencyInjection</string>
+  <string name="app_name">DI</string>
   <string name="enter_your_name">Enter your name</string>
   <string name="enter_your_email">Enter your email</string>
   <string name="enter_your_address">Enter your address</string>

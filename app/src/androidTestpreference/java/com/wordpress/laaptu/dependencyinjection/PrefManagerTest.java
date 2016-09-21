@@ -15,8 +15,8 @@ import static org.junit.Assert.assertEquals;
 /**
  */
 @RunWith(AndroidJUnit4.class) public class PrefManagerTest {
-  @Rule public ActivityTestRule<MainActivity> mainActivityActivityTestRule =
-      new ActivityTestRule<>(MainActivity.class);
+  @Rule public ActivityTestRule<MainActivityPref> mainActivityActivityTestRule =
+      new ActivityTestRule<>(MainActivityPref.class);
 
   private PrefManager prefManager;
 

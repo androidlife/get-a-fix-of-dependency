@@ -13,12 +13,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.wordpress.laaptu.dependencyinjection.R;
+import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 
 /**
  */
 
-public class FormDisplayFragment extends Fragment {
+public class FormDisplayFragment extends BaseFragment {
 
   private TextView infoText;
   private int titleStyle = R.style.DisplayTitleTextStyle, infoStyle = R.style.DisplayInfoTextStyle;
@@ -43,7 +44,7 @@ public class FormDisplayFragment extends Fragment {
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-    setUserInfo(User.getUser());
+    setUserInfo(DbManager.getInstance(getContext()).getUser());
   }
 
   private void setUserInfo(User user) {

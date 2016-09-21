@@ -4,8 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import com.squareup.otto.Subscribe;
+import com.wordpress.laaptu.dependencyinjection.data.DbManager;
+import com.wordpress.laaptu.dependencyinjection.events.BusProvider;
+import com.wordpress.laaptu.dependencyinjection.events.Events;
 import com.wordpress.laaptu.dependencyinjection.fragments.FormDisplayFragment;
 import com.wordpress.laaptu.dependencyinjection.fragments.FormEditFragment;
+import com.wordpress.laaptu.dependencyinjection.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,10 +32,20 @@ public class MainActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
-    changeFragment(FragState.Display);
+    identifyState();
   }
 
-  public void changeFragment(FragState fragState) {
+  private void identifyState() {
+    DbManager dbManager = DbManager.getInstance(this);
+    User user = dbManager.getUser();
+    if (user == null) {
+      changeFragment(FragState.Edit);
+    } else {
+      changeFragment(FragState.Display);
+    }
+  }
+
+  private void changeFragment(FragState fragState) {
     if (this.fragState != null && this.fragState == fragState) return;
     this.fragState = fragState;
     switch (fragState) {
@@ -59,5 +75,33 @@ public class MainActivity extends AppCompatActivity {
       }
     }
     return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_edit:
+        toggleFragment(null);
+        break;
+      case R.id.menu_save:
+        BusProvider.getEventBus().postEvent(new Events.EventSave());
+        break;
+    }
+    return true;
+  }
+
+  @Subscribe public void toggleFragment(Events.EventToggle event) {
+    if (fragState == null) return;
+    FragState newState = (fragState == FragState.Edit) ? FragState.Display : FragState.Edit;
+    changeFragment(newState);
+  }
+
+  @Override protected void onPause() {
+    super.onPause();
+    BusProvider.getEventBus().unregister(this);
+  }
+
+  @Override protected void onResume() {
+    super.onResume();
+    BusProvider.getEventBus().register(this);
   }
 }

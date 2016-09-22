@@ -66,6 +66,8 @@ public class FormDisplayFragment extends BaseFragment {
   }
 
   @Override public User getUser() {
+    //return PrefManager.getInstance(this,PrefManager.PREF_NAME).getUser();
+    // OR
     return DbManager.getInstance(getContext()).getUser();
   }
 }

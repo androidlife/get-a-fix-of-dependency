@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.squareup.otto.Subscribe;
 import com.wordpress.laaptu.dependencyinjection.R;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
+import com.wordpress.laaptu.dependencyinjection.data.PrefManager;
 import com.wordpress.laaptu.dependencyinjection.events.Events;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 import com.wordpress.laaptu.dependencyinjection.widgets.EditFormTextInputLayout;
@@ -101,11 +102,15 @@ public class FormEditFragment extends BaseFragment {
   }
 
   private void saveNewUserInfo(User user) {
+    //PrefManager.getInstance(getContext(),PrefManager.PREF_NAME ).storeUser(user);
+    //OR
     DbManager.getInstance(getContext()).storeUser(user);
     postEvent(new Events.EventToggle());
   }
 
   @Override public User getUser() {
+    //return PrefManager.getInstance(this,PrefManager.PREF_NAME).getUser();
+    // OR
     return DbManager.getInstance(getContext()).getUser();
   }
 }

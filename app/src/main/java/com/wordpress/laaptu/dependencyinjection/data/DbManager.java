@@ -10,7 +10,7 @@ import com.wordpress.laaptu.dependencyinjection.model.User;
  * Created by laaptu on 9/20/16.
  */
 
-public class DbManager {
+public class DbManager implements DataService {
 
   private static DbManager dbManager;
   private SQLiteDatabase db;

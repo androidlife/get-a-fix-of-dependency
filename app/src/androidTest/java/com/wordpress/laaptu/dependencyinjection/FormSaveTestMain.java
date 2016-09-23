@@ -22,6 +22,7 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static com.wordpress.laaptu.dependencyinjection.model.User.getUser;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.junit.Assert.assertEquals;
 
@@ -34,14 +35,18 @@ import static org.junit.Assert.assertEquals;
       new ActivityTestRule<>(MainActivity.class);
 
   @Test public void editAndSaveTest() {
-    onView(withId(R.id.menu_edit)).check(matches(isDisplayed()));
-    onView(withId(R.id.menu_edit)).perform(click());
-    onView(withId(R.id.menu_save)).check(matches(isDisplayed()));
     User user = new User();
     user.name = "Terminator";
     user.phone = "99900000";
     user.address = "From future";
     user.email = "terminator@arnold.com";
+    if (mainActivityActivityTestRule.getActivity().dataService.getUser() != null) {
+      onView(withId(R.id.menu_edit)).check(matches(isDisplayed()));
+      onView(withId(R.id.menu_edit)).perform(click());
+    }
+
+    onView(withId(R.id.menu_save)).check(matches(isDisplayed()));
+
     onView(withId(R.id.txt_name)).perform(clearText(), typeText(user.name));
     onView(withId(R.id.txt_email)).perform(clearText(), typeText(user.email));
     onView(withId(R.id.txt_address)).perform(clearText(), typeText(user.address));
@@ -49,9 +54,7 @@ import static org.junit.Assert.assertEquals;
 
     onView(withId(R.id.menu_save)).perform(click());
 
-    User storedUser =
-        DbManager.getInstance(mainActivityActivityTestRule.getActivity().getApplicationContext())
-            .getUser();
+    User storedUser = mainActivityActivityTestRule.getActivity().dataService.getUser();
     assertEquals(storedUser.toString(), user.toString());
     onView(withId(R.id.menu_edit)).check(matches(isDisplayed()));
     onView(withId(R.id.info_txt)).check(

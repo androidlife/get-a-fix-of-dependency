@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.wordpress.laaptu.dependencyinjection.MainApplication;
 import com.wordpress.laaptu.dependencyinjection.R;
+import com.wordpress.laaptu.dependencyinjection.data.DataService;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.model.User;
+import javax.inject.Inject;
 
 /**
  */
@@ -19,7 +22,7 @@ import com.wordpress.laaptu.dependencyinjection.model.User;
 public class FormDisplayFragment extends BaseFragment {
 
   private TextView infoText;
-  private int titleStyle = R.style.DisplayTitleTextStyle, infoStyle = R.style.DisplayInfoTextStyle;
+  @Inject DataService dataService;
 
   public FormDisplayFragment() {
 
@@ -41,6 +44,7 @@ public class FormDisplayFragment extends BaseFragment {
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
+    ((MainApplication)getActivity().getApplication()).getDataComponent().inject(this);
     setUserInfo(getUser());
   }
 
@@ -66,8 +70,6 @@ public class FormDisplayFragment extends BaseFragment {
   }
 
   @Override public User getUser() {
-    //return PrefManager.getInstance(this,PrefManager.PREF_NAME).getUser();
-    // OR
-    return DbManager.getInstance(getContext()).getUser();
+    return dataService.getUser();
   }
 }

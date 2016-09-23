@@ -11,7 +11,7 @@ import org.json.JSONObject;
 /**
  */
 
-public class PrefManager {
+public class PrefManager implements DataService {
 
   private SharedPreferences sharedPreferences;
 

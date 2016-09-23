@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.squareup.otto.Subscribe;
+import com.wordpress.laaptu.dependencyinjection.data.DataService;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.data.PrefManager;
 import com.wordpress.laaptu.dependencyinjection.events.BusProvider;
@@ -13,6 +14,7 @@ import com.wordpress.laaptu.dependencyinjection.events.Events;
 import com.wordpress.laaptu.dependencyinjection.fragments.FormDisplayFragment;
 import com.wordpress.laaptu.dependencyinjection.fragments.FormEditFragment;
 import com.wordpress.laaptu.dependencyinjection.model.User;
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,9 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
   private FragState fragState;
 
+  @Inject DataService dataService;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    ((MainApplication) getApplication()).getDataComponent().inject(this);
+
     toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -108,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private User getUser() {
-    //return PrefManager.getInstance(this,PrefManager.PREF_NAME).getUser();
-    // OR
-    return DbManager.getInstance(this).getUser();
+
+    return dataService.getUser();
   }
 }

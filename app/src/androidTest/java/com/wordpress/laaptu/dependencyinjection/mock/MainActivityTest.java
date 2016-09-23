@@ -7,6 +7,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import com.wordpress.laaptu.dependencyinjection.MainActivity;
 import com.wordpress.laaptu.dependencyinjection.MainApplication;
+import com.wordpress.laaptu.dependencyinjection.R;
 import com.wordpress.laaptu.dependencyinjection.data.DataService;
 import com.wordpress.laaptu.dependencyinjection.mock.dagger.MockDataComponent;
 import com.wordpress.laaptu.dependencyinjection.model.User;
@@ -15,8 +16,15 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.atLeastOnce;
 
 /**
@@ -44,6 +52,13 @@ import static org.mockito.Mockito.atLeastOnce;
     Mockito.when(dataService.getUser()).thenReturn(user);
     mainActivityActivityTestRule.launchActivity(new Intent());
 
-    Mockito.verify(dataService,atLeastOnce()).getUser();
+    Mockito.verify(dataService, atLeastOnce()).getUser();
+    onView(withId(R.id.menu_edit)).check(matches(isDisplayed()));
+    onView(withId(R.id.menu_edit)).perform(click());
+    onView(withId(R.id.menu_save)).check(matches(isDisplayed()));
+    onView(withId(R.id.menu_save)).perform(click());
+    ArgumentCaptor<User> argument = ArgumentCaptor.forClass(User.class);
+    Mockito.verify(dataService).storeUser(argument.capture());
+    assertEquals(user.toString(), argument.getValue().toString());
   }
 }

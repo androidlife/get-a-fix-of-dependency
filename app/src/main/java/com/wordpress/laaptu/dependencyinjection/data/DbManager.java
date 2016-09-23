@@ -7,16 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 
 /**
- * Created by laaptu on 9/20/16.
  */
 
 public class DbManager implements DataService {
 
-  private static DbManager dbManager;
   private SQLiteDatabase db;
-  private DbHelper dbHelper;
 
-  private DbManager() {
+  public DbManager(Context context) {
+    init(context);
   }
 
   private void init(Context context) {
@@ -24,12 +22,6 @@ public class DbManager implements DataService {
     if (db == null) {
       db = dbHelper.getWritableDatabase();
     }
-  }
-
-  public static DbManager getInstance(Context context) {
-    if (dbManager == null) dbManager = new DbManager();
-    dbManager.init(context);
-    return dbManager;
   }
 
   public void closeDatabase() {

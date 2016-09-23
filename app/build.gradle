@@ -12,8 +12,10 @@ android {
     targetSdkVersion 24
     versionCode 1
     versionName "1.0"
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "com.wordpress.laaptu.dependencyinjection.mock.MockTestRunner"
   }
+
 }
 
 dependencies {
@@ -29,6 +31,11 @@ dependencies {
   compile 'com.google.dagger:dagger:2.0'
   apt 'com.google.dagger:dagger-compiler:2.0'
   provided 'javax.annotation:jsr250-api:1.0'
+  //just for fun using mock and stuff
+  androidTestCompile 'org.mockito:mockito-core:1.10.19'
+  androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+  androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+  androidTestApt 'com.google.dagger:dagger-compiler:2.0'
 
 
 }

@@ -4,10 +4,12 @@ import com.wordpress.laaptu.dependencyinjection.MainActivity;
 import com.wordpress.laaptu.dependencyinjection.fragments.FormDisplayFragment;
 import com.wordpress.laaptu.dependencyinjection.fragments.FormEditFragment;
 import dagger.Component;
+import javax.inject.Singleton;
 
 /**
  */
-@Component(modules = { DataModule.class }) public interface DataComponent {
+@Singleton
+@Component(modules = { DataModule.class,AndroidModule.class }) public interface DataComponent {
   void inject(MainActivity target);
 
   void inject(FormDisplayFragment target);

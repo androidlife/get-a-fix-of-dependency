@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private User getUser() {
-
     return dataService.getUser();
   }
 }

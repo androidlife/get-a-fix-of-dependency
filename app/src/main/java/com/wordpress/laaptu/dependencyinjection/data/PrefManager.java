@@ -15,19 +15,12 @@ public class PrefManager implements DataService {
 
   private SharedPreferences sharedPreferences;
 
-  private static PrefManager prefManager;
-
   public static final String PREF_NAME = "diPref";
   private Context context;
 
-  private PrefManager(Context context, String prefName) {
+  public PrefManager(Context context, String prefName) {
     sharedPreferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
     this.context = context;
-  }
-
-  public static PrefManager getInstance(Context context, String prefName) {
-    if (prefManager == null) prefManager = new PrefManager(context, prefName);
-    return prefManager;
   }
 
   public User getUser() {

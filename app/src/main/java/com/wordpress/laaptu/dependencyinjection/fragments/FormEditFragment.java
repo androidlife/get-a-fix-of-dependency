@@ -59,7 +59,7 @@ public class FormEditFragment extends BaseFragment {
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    ((MainApplication) getActivity().getApplication()).getDataComponent().inject(this);
+    ((MainApplication) getActivity().getApplication()).getDataComponent().injecto(this);
 
     user = getUser();
     setValues();

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.wordpress.laaptu.dependencyinjection.MainApplication;
 import com.wordpress.laaptu.dependencyinjection.R;
+import com.wordpress.laaptu.dependencyinjection.dagger.scope.RandomString;
 import com.wordpress.laaptu.dependencyinjection.data.DataService;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.model.User;
@@ -23,6 +24,7 @@ public class FormDisplayFragment extends BaseFragment {
 
   private TextView infoText;
   @Inject DataService dataService;
+  @Inject RandomString randomString;
 
   public FormDisplayFragment() {
 
@@ -44,8 +46,13 @@ public class FormDisplayFragment extends BaseFragment {
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-    ((MainApplication)getActivity().getApplication()).getDataComponent().inject(this);
+    ((MainApplication) getActivity().getApplication()).getSubComponent().inject(this);
     setUserInfo(getUser());
+  }
+
+  @Override public void onDestroy() {
+    super.onDestroy();
+    ((MainApplication) getActivity().getApplication()).destroySubComponent();
   }
 
   private void setUserInfo(User user) {

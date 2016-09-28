@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.squareup.otto.Subscribe;
 import com.wordpress.laaptu.dependencyinjection.MainApplication;
 import com.wordpress.laaptu.dependencyinjection.R;
+import com.wordpress.laaptu.dependencyinjection.dagger.scope.RandomString;
 import com.wordpress.laaptu.dependencyinjection.data.DataService;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.data.PrefManager;
@@ -29,6 +30,7 @@ public class FormEditFragment extends BaseFragment {
   User user;
 
   @Inject DataService dataService;
+  @Inject RandomString randomString;
 
   public static FormEditFragment getInstance(Bundle params) {
     FormEditFragment fragment = new FormEditFragment();
@@ -59,10 +61,15 @@ public class FormEditFragment extends BaseFragment {
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    ((MainApplication) getActivity().getApplication()).getDataComponent().inject(this);
+    ((MainApplication) getActivity().getApplication()).getSubComponent().inject(this);
 
     user = getUser();
     setValues();
+  }
+
+  @Override public void onDestroy() {
+    super.onDestroy();
+    ((MainApplication)getActivity().getApplication()).destroySubComponent();
   }
 
   private void setValues() {

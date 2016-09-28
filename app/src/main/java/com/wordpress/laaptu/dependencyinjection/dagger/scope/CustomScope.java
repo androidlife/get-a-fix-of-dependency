@@ -6,5 +6,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FirstScope {
+public @interface CustomScope {
 }

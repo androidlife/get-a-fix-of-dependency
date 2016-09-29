@@ -1,5 +1,6 @@
 package com.wordpress.laaptu.dependencyinjection.mock.dagger;
 
+import android.content.Context;
 import com.wordpress.laaptu.dependencyinjection.dagger.DataComponent;
 import com.wordpress.laaptu.dependencyinjection.mock.MainActivityTest;
 import dagger.Component;
@@ -11,4 +12,5 @@ import javax.inject.Singleton;
 @Singleton @Component(modules = { MockDataModule.class }) public interface MockDataComponent extends
     DataComponent {
   void inject(MainActivityTest target);
+
 }

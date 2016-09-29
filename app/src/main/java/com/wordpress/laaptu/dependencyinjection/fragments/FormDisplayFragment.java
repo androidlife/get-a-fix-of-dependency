@@ -12,10 +12,12 @@ import android.widget.TextView;
 import com.wordpress.laaptu.dependencyinjection.MainApplication;
 import com.wordpress.laaptu.dependencyinjection.R;
 import com.wordpress.laaptu.dependencyinjection.dagger.scope.RandomString;
+import com.wordpress.laaptu.dependencyinjection.dagger.scope.SomeBigArray;
 import com.wordpress.laaptu.dependencyinjection.data.DataService;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  */
@@ -24,7 +26,8 @@ public class FormDisplayFragment extends BaseFragment {
 
   private TextView infoText;
   @Inject DataService dataService;
-  @Inject RandomString randomString;
+  @Inject @Named("forFormDisplayFragment") RandomString randomString;
+  @Inject SomeBigArray someBigArray;
 
   public FormDisplayFragment() {
 

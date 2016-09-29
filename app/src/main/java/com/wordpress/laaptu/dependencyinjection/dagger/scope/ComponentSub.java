@@ -6,6 +6,9 @@ import dagger.Subcomponent;
 
 /**
  */
+@CustomScope
+//Adding custom scope doesn't mean anything here
+// means need to understand it more
 @Subcomponent(modules = { ModuleSub.class }) public interface ComponentSub {
   void inject(FormDisplayFragment target);
 

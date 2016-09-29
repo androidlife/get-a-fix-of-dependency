@@ -12,6 +12,7 @@ import com.squareup.otto.Subscribe;
 import com.wordpress.laaptu.dependencyinjection.MainApplication;
 import com.wordpress.laaptu.dependencyinjection.R;
 import com.wordpress.laaptu.dependencyinjection.dagger.scope.RandomString;
+import com.wordpress.laaptu.dependencyinjection.dagger.scope.SomeBigArray;
 import com.wordpress.laaptu.dependencyinjection.data.DataService;
 import com.wordpress.laaptu.dependencyinjection.data.DbManager;
 import com.wordpress.laaptu.dependencyinjection.data.PrefManager;
@@ -19,6 +20,7 @@ import com.wordpress.laaptu.dependencyinjection.events.Events;
 import com.wordpress.laaptu.dependencyinjection.model.User;
 import com.wordpress.laaptu.dependencyinjection.widgets.EditFormTextInputLayout;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  */
@@ -30,7 +32,8 @@ public class FormEditFragment extends BaseFragment {
   User user;
 
   @Inject DataService dataService;
-  @Inject RandomString randomString;
+  @Inject @Named("forFormEditFragment") RandomString randomString;
+  @Inject SomeBigArray someBigArray;
 
   public static FormEditFragment getInstance(Bundle params) {
     FormEditFragment fragment = new FormEditFragment();

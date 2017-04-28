@@ -3,9 +3,8 @@ package com.wordpress.laaptu.dependencyinjection;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import com.wordpress.laaptu.dependencyinjection.data.DbManager;
+
 import com.wordpress.laaptu.dependencyinjection.model.User;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -22,7 +21,6 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.wordpress.laaptu.dependencyinjection.model.User.getUser;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.junit.Assert.assertEquals;
 
@@ -31,8 +29,8 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(AndroidJUnit4.class) public class FormSaveTestMain {
 
-  @Rule public ActivityTestRule<MainActivity> mainActivityActivityTestRule =
-      new ActivityTestRule<>(MainActivity.class);
+  @Rule public ActivityTestRule<HotelA> mainActivityActivityTestRule =
+      new ActivityTestRule<>(HotelA.class);
 
   @Test public void editAndSaveTest() {
     User user = new User();

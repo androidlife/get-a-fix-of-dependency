@@ -23,6 +23,9 @@ public class RestaurantB extends BaseFragment {
     TextView txtTitle;
     @BindView(R.id.btn_brew_coffee)
     Button btnBrewCoffee;
+    //For coffee
+    int waterQuantity =10;
+    Coffee.Flavor flavor = Coffee.Flavor.Latte;
 
     public RestaurantB() {
 
@@ -46,19 +49,25 @@ public class RestaurantB extends BaseFragment {
         btnBrewCoffee.setText(getString(R.string.brew_coffee, "Latte"));
     }
 
+    private CoffeeHelper coffeeHelper;
+    public void withDagger(){
+
+    }
+
     @OnClick(R.id.btn_brew_coffee)
     public void brewCoffee() {
         brewWithHelper();
     }
 
+
     private void brewWithHelper() {
-        CoffeeBrewer coffeeBrewer = CoffeeHelper.Instance.getCoffeeBrewer(10, Coffee.Flavor.Latte);
+        CoffeeHelper coffeeHelper  =new CoffeeHelper();
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity,flavor);
         coffeeBrewer.brewCoffee();
     }
-
     private void brewUsual() {
-        Water water = new Water(10);
-        Coffee coffee = new Coffee(Coffee.Flavor.Latte);
+        Water water = new Water(waterQuantity);
+        Coffee coffee = new Coffee(flavor);
         CoffeeBrewer coffeeBrewer = new CoffeeBrewer(water, coffee);
         coffeeBrewer.brewCoffee();
     }

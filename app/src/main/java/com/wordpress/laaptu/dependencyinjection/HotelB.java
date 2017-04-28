@@ -31,6 +31,10 @@ public class HotelB extends AppCompatActivity {
     @BindView(R.id.btn_brew_coffee)
     Button btnBrewCoffee;
 
+    //For coffee
+    int waterQuantity =10;
+    Coffee.Flavor flavor = Coffee.Flavor.Americano;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,19 +54,25 @@ public class HotelB extends AppCompatActivity {
         return true;
     }
 
+    private CoffeeHelper coffeeHelper;
+    private void withDagger(){
+
+    }
+
     @OnClick(R.id.btn_brew_coffee)
     public void brewCoffee() {
         brewWithHelper();
     }
 
+
     private void brewWithHelper() {
-        CoffeeBrewer coffeeBrewer = CoffeeHelper.Instance.getCoffeeBrewer(10, Coffee.Flavor.Americano);
+        CoffeeHelper coffeeHelper  =new CoffeeHelper();
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity,flavor);
         coffeeBrewer.brewCoffee();
     }
-
     private void brewUsual() {
-        Water water = new Water(10);
-        Coffee coffee = new Coffee(Coffee.Flavor.Americano);
+        Water water = new Water(waterQuantity);
+        Coffee coffee = new Coffee(flavor);
         CoffeeBrewer coffeeBrewer = new CoffeeBrewer(water, coffee);
         coffeeBrewer.brewCoffee();
     }

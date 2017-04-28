@@ -10,8 +10,12 @@ import android.view.MenuItem;
 import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantA;
 import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantB;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class HotelA extends AppCompatActivity {
 
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     private static final String RESTAURANT_A = "RestaurantA", RESTAURNAT_B =
@@ -27,11 +31,12 @@ public class HotelA extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.hotel_a);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+        getSupportActionBar().setTitle("Hotel A");
         changeFragment(FragState.RestaurantA);
     }
 

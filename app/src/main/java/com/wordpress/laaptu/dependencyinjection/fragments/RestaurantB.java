@@ -2,29 +2,21 @@ package com.wordpress.laaptu.dependencyinjection.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.util.Patterns;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.TextView;
 
-import com.squareup.otto.Subscribe;
-import com.wordpress.laaptu.dependencyinjection.MainApplication;
 import com.wordpress.laaptu.dependencyinjection.R;
-import com.wordpress.laaptu.dependencyinjection.data.DataService;
-import com.wordpress.laaptu.dependencyinjection.events.Events;
-import com.wordpress.laaptu.dependencyinjection.model.User;
-import com.wordpress.laaptu.dependencyinjection.widgets.EditFormTextInputLayout;
 
-import javax.inject.Inject;
+import butterknife.BindView;
 
 /**
  */
 
 public class RestaurantB extends BaseFragment {
 
-    public RestaurantB(){
+    @BindView(R.id.txt_title)
+    TextView txtTitle;
+
+    public RestaurantB() {
 
     }
 
@@ -36,6 +28,12 @@ public class RestaurantB extends BaseFragment {
 
     @Override
     int getLayoutId() {
-        return 0;
+        return R.layout.restaurant_b;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        txtTitle.setText("Restaurant B");
     }
 }

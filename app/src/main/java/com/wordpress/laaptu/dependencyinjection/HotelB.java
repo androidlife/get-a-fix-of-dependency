@@ -8,10 +8,14 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.DaggerCoffeeComponent;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
 import com.wordpress.laaptu.dependencyinjection.utils.CoffeeHelper;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +49,7 @@ public class HotelB extends AppCompatActivity {
         getSupportActionBar().setTitle("Hotel B");
         txtTitle.setText("Hotel B");
         btnBrewCoffee.setText(getString(R.string.brew_coffee, "Americano"));
+        goDagger();
     }
 
     @Override
@@ -54,14 +59,21 @@ public class HotelB extends AppCompatActivity {
         return true;
     }
 
-    private CoffeeHelper coffeeHelper;
-    private void withDagger(){
+    @Inject
+    public CoffeeHelper coffeeHelper;
+    private void goDagger() {
+        CoffeeComponent coffeeComponent = DaggerCoffeeComponent.builder().build();
+        coffeeComponent.provideCoffee(this);
+    }
 
+    private void withDagger() {
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
+        coffeeBrewer.brewCoffee();
     }
 
     @OnClick(R.id.btn_brew_coffee)
     public void brewCoffee() {
-        brewWithHelper();
+        withDagger();
     }
 
 

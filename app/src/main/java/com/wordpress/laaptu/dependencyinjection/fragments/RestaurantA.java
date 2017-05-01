@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 /**
  */
@@ -51,6 +52,7 @@ public class RestaurantA extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Timber.d("onActivityCreated()");
         txtTitle.setText("Restaurant A");
         btnBrewCoffee.setText(getString(R.string.brew_coffee, "Espresso"));
         goDagger();

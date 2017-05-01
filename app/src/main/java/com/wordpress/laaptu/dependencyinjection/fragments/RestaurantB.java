@@ -6,13 +6,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wordpress.laaptu.dependencyinjection.R;
+import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.DaggerCoffeeComponent;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
 import com.wordpress.laaptu.dependencyinjection.utils.CoffeeHelper;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 /**
  */
@@ -45,18 +50,27 @@ public class RestaurantB extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Timber.d("onActivityCreated()");
         txtTitle.setText("Restaurant B");
         btnBrewCoffee.setText(getString(R.string.brew_coffee, "Latte"));
+        goDagger();
     }
 
-    private CoffeeHelper coffeeHelper;
-    public void withDagger(){
+    @Inject
+    public CoffeeHelper coffeeHelper;
+    private void goDagger() {
+        CoffeeComponent coffeeComponent = DaggerCoffeeComponent.builder().build();
+        coffeeComponent.provideCoffee(this);
+    }
 
+    private void withDagger() {
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
+        coffeeBrewer.brewCoffee();
     }
 
     @OnClick(R.id.btn_brew_coffee)
     public void brewCoffee() {
-        brewWithHelper();
+        withDagger();
     }
 
 

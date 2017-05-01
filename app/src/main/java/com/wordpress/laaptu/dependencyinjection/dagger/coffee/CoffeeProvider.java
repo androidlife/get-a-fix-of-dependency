@@ -1,4 +1,4 @@
-package com.wordpress.laaptu.dependencyinjection.dagger;
+package com.wordpress.laaptu.dependencyinjection.dagger.coffee;
 
 import com.wordpress.laaptu.dependencyinjection.utils.CoffeeHelper;
 

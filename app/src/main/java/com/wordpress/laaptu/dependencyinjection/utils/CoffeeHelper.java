@@ -4,12 +4,25 @@ import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
 
+import javax.inject.Inject;
+
 /**
  * Created by laaptu on 4/28/17.
  */
 
 public class CoffeeHelper {
 
+    public CoffeeHelper() {
+
+    }
+
+    public CoffeeBrewer getCoffeeBrewer(int waterQuantity, Coffee.Flavor flavor) {
+        Water water = new Water(waterQuantity);
+        Coffee coffee = new Coffee(flavor);
+        return new CoffeeBrewer(water, coffee);
+    }
+
+    //---------------
     private int waterQuantity;
     private Coffee.Flavor flavor;
 
@@ -25,14 +38,11 @@ public class CoffeeHelper {
         return new CoffeeBrewer(water, coffee);
     }
 
-    //---------------------
-    public CoffeeHelper() {
-
+    //--------
+    @Inject
+    public CoffeeHelper(Coffee.Flavor flavor,int waterQuantity){
+        this.waterQuantity = waterQuantity;
+        this.flavor = flavor;
     }
 
-    public CoffeeBrewer getCoffeeBrewer(int waterQuantity, Coffee.Flavor flavor) {
-        Water water = new Water(waterQuantity);
-        Coffee coffee = new Coffee(flavor);
-        return new CoffeeBrewer(water, coffee);
-    }
 }

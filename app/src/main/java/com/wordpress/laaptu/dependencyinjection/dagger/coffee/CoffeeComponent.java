@@ -1,4 +1,4 @@
-package com.wordpress.laaptu.dependencyinjection.dagger;
+package com.wordpress.laaptu.dependencyinjection.dagger.coffee;
 
 import com.wordpress.laaptu.dependencyinjection.HotelB;
 import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantA;
@@ -12,8 +12,4 @@ import dagger.Component;
 @Component(modules = {CoffeeProvider.class})
 public interface CoffeeComponent {
     void provideCoffee(RestaurantA restaurantA);
-
-    void provideCoffee(RestaurantB restaurantB);
-
-    void provideCoffee(HotelB hotelB);
 }

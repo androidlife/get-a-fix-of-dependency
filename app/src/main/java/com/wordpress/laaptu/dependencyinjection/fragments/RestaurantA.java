@@ -6,8 +6,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wordpress.laaptu.dependencyinjection.R;
-import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeComponent;
-import com.wordpress.laaptu.dependencyinjection.dagger.DaggerCoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.coffee.CoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.coffee.DaggerCoffeeComponent;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
@@ -60,22 +60,34 @@ public class RestaurantA extends BaseFragment {
 
     @Inject
     public CoffeeHelper coffeeHelper;
+
     private void goDagger() {
         CoffeeComponent coffeeComponent = DaggerCoffeeComponent.builder().build();
         coffeeComponent.provideCoffee(this);
     }
-
-
 
     private void withDagger() {
         CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
         coffeeBrewer.brewCoffee();
     }
 
+    //Method injection
+    private CoffeeHelper coffeeMaker;
+
+    @Inject
+    public void setCoffeeMaker(CoffeeHelper coffeeMaker) {
+        this.coffeeMaker = coffeeMaker;
+    }
+
+    private void withMethodInjection() {
+        CoffeeBrewer coffeeBrewer = coffeeMaker.getCoffeeBrewer(waterQuantity, flavor);
+        coffeeBrewer.brewCoffee();
+    }
+
 
     @OnClick(R.id.btn_brew_coffee)
     public void brewCoffee() {
-        withDagger();
+        withMethodInjection();
     }
 
 

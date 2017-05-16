@@ -15,7 +15,7 @@ android {
     }
     productFlavors {
         di {
-            applicationId applicationIdBase+'.basic'
+            applicationId applicationIdBase+'.basic1'
         }
     }
 }

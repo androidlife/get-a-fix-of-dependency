@@ -18,14 +18,6 @@ public class HotelA extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private static final String RESTAURANT_A = "RestaurantA", RESTAURNAT_B =
-            "RestaurantB";
-
-    public enum FragState {
-        RestaurantA, RestaurantB
-    }
-
-    private FragState fragState;
 
 
     @Override
@@ -37,26 +29,8 @@ public class HotelA extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
         getSupportActionBar().setTitle("Hotel A");
-        changeFragment(FragState.RestaurantA);
     }
 
-    private void changeFragment(FragState fragState) {
-        if (this.fragState != null && this.fragState == fragState) return;
-        this.fragState = fragState;
-        switch (fragState) {
-            case RestaurantA:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, RestaurantA.getInstance(null), RESTAURANT_A)
-                        .commit();
-                break;
-            case RestaurantB:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, RestaurantB.getInstance(null), RESTAURNAT_B)
-                        .commit();
-                break;
-        }
-        invalidateOptionsMenu();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,19 +44,8 @@ public class HotelA extends AppCompatActivity {
             case R.id.menu_change_hotel:
                 startActivity(new Intent(this, HotelB.class));
                 break;
-            case R.id.menu_change_restaurant:
-                changeRestaurant();
-                break;
         }
         return true;
     }
-
-
-    public void changeRestaurant() {
-        if (fragState == null) return;
-        FragState newState = (fragState == FragState.RestaurantA) ? FragState.RestaurantB : FragState.RestaurantA;
-        changeFragment(newState);
-    }
-
 
 }

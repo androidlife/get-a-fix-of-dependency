@@ -1,6 +1,10 @@
 package com.wordpress.laaptu.dependencyinjection.dagger;
 
+import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
+import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
 import com.wordpress.laaptu.dependencyinjection.utils.CoffeeHelper;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -11,8 +15,14 @@ import dagger.Provides;
 @Module
 public class CoffeeProvider {
 
+    @Singleton
     @Provides
     CoffeeHelper getCoffeeHelper() {
         return new CoffeeHelper();
+    }
+
+    @Provides
+    Water getWater(){
+        return new Water(10);
     }
 }

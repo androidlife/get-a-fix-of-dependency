@@ -2,6 +2,7 @@ package com.wordpress.laaptu.dependencyinjection;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,6 +19,9 @@ public class HotelA extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    private static final String FRAG_RESTAURANTA = "restaurantA", FRAG_RESTAURANTB = "restaurantB";
+    private String currentFragmentTag = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +31,11 @@ public class HotelA extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
         getSupportActionBar().setTitle("Hotel A");
-    }
 
+        getSupportFragmentManager().beginTransaction().replace(
+                R.id.container, RestaurantA.getInstance(null), FRAG_RESTAURANTA).commit();
+        currentFragmentTag = FRAG_RESTAURANTA;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,8 +49,30 @@ public class HotelA extends AppCompatActivity {
             case R.id.menu_change_hotel:
                 startActivity(new Intent(this, HotelB.class));
                 break;
+            case R.id.menu_change_restaurant:
+                toggleFragment();
+                break;
         }
         return true;
+    }
+
+    private void toggleFragment() {
+        Fragment fragment = null;
+        switch (currentFragmentTag) {
+            case FRAG_RESTAURANTA:
+                fragment = RestaurantB.getInstance(null);
+                currentFragmentTag = FRAG_RESTAURANTB;
+                break;
+            case FRAG_RESTAURANTB:
+                fragment = RestaurantA.getInstance(null);
+                currentFragmentTag = FRAG_RESTAURANTA;
+                break;
+        }
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(
+                    R.id.container, fragment, currentFragmentTag
+            ).commit();
+        }
     }
 
 

@@ -6,8 +6,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wordpress.laaptu.dependencyinjection.R;
-import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeComponent;
-import com.wordpress.laaptu.dependencyinjection.dagger.DaggerCoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.restaurantb.CoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.restaurantb.DaggerIngredientsComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.restaurantb.IngredientsComponent;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
@@ -62,13 +63,15 @@ public class RestaurantB extends BaseFragment {
     public Water water;
     private CoffeeComponent coffeeComponent;
     private void goDagger() {
-        coffeeComponent = DaggerCoffeeComponent.builder().build();
+        IngredientsComponent ingredientsComponent =
+                DaggerIngredientsComponent.builder().build();
+        coffeeComponent = ingredientsComponent.provideCoffeeComponent();
         //coffeeComponent.provideCoffee(this);
     }
 
     private void withDagger() {
         coffeeComponent.provideCoffee(this);
-        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer();
         coffeeBrewer.brewCoffee();
     }
 

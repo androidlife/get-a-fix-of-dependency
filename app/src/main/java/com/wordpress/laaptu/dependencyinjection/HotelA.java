@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.wordpress.laaptu.dependencyinjection.dagger.components.DaggerWaterComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.components.WaterComponent;
 import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantA;
 import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantB;
 
@@ -36,6 +38,7 @@ public class HotelA extends AppCompatActivity {
                 R.id.container, RestaurantA.getInstance(null), FRAG_RESTAURANTA).commit();
         currentFragmentTag = FRAG_RESTAURANTA;
     }
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

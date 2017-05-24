@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeComponent;
-import com.wordpress.laaptu.dependencyinjection.dagger.DaggerCoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.hotelb.CoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.hotelb.DaggerCoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.hotelb.DaggerIngredientsComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.hotelb.IngredientsComponent;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
@@ -62,7 +64,8 @@ public class HotelB extends AppCompatActivity {
     @Inject
     public CoffeeHelper coffeeHelper;
     private void goDagger() {
-        CoffeeComponent coffeeComponent = DaggerCoffeeComponent.builder().build();
+        IngredientsComponent ingredientsComponent = DaggerIngredientsComponent.create();
+        CoffeeComponent coffeeComponent = DaggerCoffeeComponent.builder().ingredientsComponent(ingredientsComponent).build();
         coffeeComponent.provideCoffee(this);
     }
 

@@ -14,9 +14,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = {CoffeeProvider.class})
 public interface CoffeeComponent {
-    void provideCoffee(RestaurantA restaurantA);
-
-    void provideCoffee(RestaurantB restaurantB);
-
     void provideCoffee(HotelB hotelB);
 }

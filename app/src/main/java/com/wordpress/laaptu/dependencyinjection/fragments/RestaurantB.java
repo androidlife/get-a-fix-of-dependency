@@ -4,20 +4,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.OnClick;
+import com.wordpress.laaptu.dependencyinjection.HotelA;
 import com.wordpress.laaptu.dependencyinjection.R;
-import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeComponent;
-import com.wordpress.laaptu.dependencyinjection.dagger.DaggerCoffeeComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.components.CoffeeComponent;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
 import com.wordpress.laaptu.dependencyinjection.utils.CoffeeHelper;
+import timber.log.Timber;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.OnClick;
-import timber.log.Timber;
 
 /**
  */
@@ -57,18 +55,17 @@ public class RestaurantB extends BaseFragment {
     }
 
     @Inject
-    public CoffeeHelper coffeeHelper;
-    @Inject
-    public Water water;
+    public CoffeeBrewer coffeeBrewer;
     private CoffeeComponent coffeeComponent;
     private void goDagger() {
-        coffeeComponent = DaggerCoffeeComponent.builder().build();
-        //coffeeComponent.provideCoffee(this);
+        if(getContext() instanceof HotelA){
+            HotelA hotelA = (HotelA)getContext();
+            coffeeComponent = hotelA.getCoffeeComponent(Coffee.Flavor.Latte);
+            coffeeComponent.provideCoffeeBrewer(this);
+        }
     }
 
     private void withDagger() {
-        coffeeComponent.provideCoffee(this);
-        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
         coffeeBrewer.brewCoffee();
     }
 
@@ -78,15 +75,4 @@ public class RestaurantB extends BaseFragment {
     }
 
 
-    private void brewWithHelper() {
-        CoffeeHelper coffeeHelper  =new CoffeeHelper();
-        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity,flavor);
-        coffeeBrewer.brewCoffee();
-    }
-    private void brewUsual() {
-        Water water = new Water(waterQuantity);
-        Coffee coffee = new Coffee(flavor);
-        CoffeeBrewer coffeeBrewer = new CoffeeBrewer(water, coffee);
-        coffeeBrewer.brewCoffee();
-    }
 }

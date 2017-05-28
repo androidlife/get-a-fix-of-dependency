@@ -8,13 +8,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.wordpress.laaptu.dependencyinjection.dagger.components.CoffeeComponent;
 import com.wordpress.laaptu.dependencyinjection.dagger.components.DaggerWaterComponent;
 import com.wordpress.laaptu.dependencyinjection.dagger.components.WaterComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.providers.CoffeeBrewerProvider;
+import com.wordpress.laaptu.dependencyinjection.dagger.providers.WaterProvider;
 import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantA;
 import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantB;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 
 public class HotelA extends AppCompatActivity {
 
@@ -23,6 +27,10 @@ public class HotelA extends AppCompatActivity {
 
     private static final String FRAG_RESTAURANTA = "restaurantA", FRAG_RESTAURANTB = "restaurantB";
     private String currentFragmentTag = null;
+
+    private WaterComponent waterComponent;
+    private CoffeeComponent coffeeComponent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +45,22 @@ public class HotelA extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(
                 R.id.container, RestaurantA.getInstance(null), FRAG_RESTAURANTA).commit();
         currentFragmentTag = FRAG_RESTAURANTA;
+        initWaterComponent();
     }
-    
+
+    private void initWaterComponent() {
+        waterComponent = DaggerWaterComponent.builder().waterProvider(new WaterProvider(20)).build();
+    }
+
+    public CoffeeComponent getCoffeeComponent(Coffee.Flavor flavor) {
+        coffeeComponent = waterComponent.getCoffeeComponent(new CoffeeBrewerProvider(flavor));
+        return coffeeComponent;
+    }
+
+    public void removeCoffeeComponent() {
+        coffeeComponent = null;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

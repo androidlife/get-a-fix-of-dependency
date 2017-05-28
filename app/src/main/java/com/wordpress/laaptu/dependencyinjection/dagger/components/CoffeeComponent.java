@@ -18,4 +18,6 @@ import dagger.Subcomponent;
 
 @Subcomponent(modules = {CoffeeBrewerProvider.class})
 public interface CoffeeComponent {
+    void provideCoffeeBrewer(RestaurantA restaurantA);
+    void provideCoffeeBrewer(RestaurantB restaurantB);
 }

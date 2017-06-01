@@ -38,11 +38,7 @@ public class CoffeeHelper {
         return new CoffeeBrewer(water, coffee);
     }
 
-    //--------
-    @Inject
-    public CoffeeHelper(Coffee.Flavor flavor,int waterQuantity){
-        this.waterQuantity = waterQuantity;
-        this.flavor = flavor;
-    }
+
+
 
 }

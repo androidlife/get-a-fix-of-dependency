@@ -82,7 +82,7 @@ public class RestaurantA extends BaseFragment {
 //    }
 
     private void withMethodInjection() {
-        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer();
         coffeeBrewer.brewCoffee();
     }
 

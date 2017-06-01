@@ -8,16 +8,15 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.wordpress.laaptu.dependencyinjection.dagger.coffee.CoffeeComponent;
-import com.wordpress.laaptu.dependencyinjection.dagger.coffee.DaggerCoffeeComponent;
-import com.wordpress.laaptu.dependencyinjection.dagger.coffee.constructor.CoffeeComp;
-import com.wordpress.laaptu.dependencyinjection.dagger.coffee.constructor.DaggerCoffeeComp;
+import com.wordpress.laaptu.dependencyinjection.dagger.coffee.named.CoffeeComp;
+import com.wordpress.laaptu.dependencyinjection.dagger.coffee.named.DaggerCoffeeComp;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
 import com.wordpress.laaptu.dependencyinjection.utils.CoffeeHelper;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,8 +37,7 @@ public class HotelB extends AppCompatActivity {
     Button btnBrewCoffee;
 
     //For coffee
-    int waterQuantity =10;
-    Coffee.Flavor flavor = Coffee.Flavor.Americano;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +60,13 @@ public class HotelB extends AppCompatActivity {
     }
 
     @Inject
+    @Named("Medium")
+    public int waterQuantity;
+    @Inject
+    public Coffee.Flavor flavor;
+    @Inject
     public CoffeeHelper coffeeHelper;
+
     private void goDagger() {
         CoffeeComp coffeeComp = DaggerCoffeeComp.builder().build();
         coffeeComp.injectCoffeeHelper(this);
@@ -80,10 +84,11 @@ public class HotelB extends AppCompatActivity {
 
 
     private void brewWithHelper() {
-        CoffeeHelper coffeeHelper  =new CoffeeHelper();
-        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity,flavor);
+        CoffeeHelper coffeeHelper = new CoffeeHelper();
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
         coffeeBrewer.brewCoffee();
     }
+
     private void brewUsual() {
         Water water = new Water(waterQuantity);
         Coffee coffee = new Coffee(flavor);

@@ -6,8 +6,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wordpress.laaptu.dependencyinjection.R;
-import com.wordpress.laaptu.dependencyinjection.dagger.coffee.other.CoffeeComponentOther;
-import com.wordpress.laaptu.dependencyinjection.dagger.coffee.other.DaggerCoffeeComponentOther;
+import com.wordpress.laaptu.dependencyinjection.dagger.coffee.moduledep.CoffeeComponentOther;
+import com.wordpress.laaptu.dependencyinjection.dagger.coffee.moduledep.DaggerCoffeeComponentOther;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;

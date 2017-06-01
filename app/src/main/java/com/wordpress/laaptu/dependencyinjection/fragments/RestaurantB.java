@@ -63,6 +63,8 @@ public class RestaurantB extends BaseFragment {
         coffeeComponentOther.provideCoffee(this);
     }
 
+
+
     private void withDagger() {
         CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer();
         coffeeBrewer.brewCoffee();

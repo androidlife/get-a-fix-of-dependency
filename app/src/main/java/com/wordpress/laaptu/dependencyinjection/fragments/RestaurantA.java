@@ -58,7 +58,6 @@ public class RestaurantA extends BaseFragment {
         goDagger();
     }
 
-    @Inject
     public CoffeeHelper coffeeHelper;
 
     private void goDagger() {
@@ -66,21 +65,24 @@ public class RestaurantA extends BaseFragment {
         coffeeComponent.provideCoffee(this);
     }
 
-    private void withDagger() {
-        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
-        coffeeBrewer.brewCoffee();
-    }
-
-    //Method injection
-    private CoffeeHelper coffeeMaker;
-
     @Inject
-    public void setCoffeeMaker(CoffeeHelper coffeeMaker) {
-        this.coffeeMaker = coffeeMaker;
+    public void setCoffeeMaker(CoffeeHelper coffeeHelper) {
+        this.coffeeHelper = coffeeHelper;
     }
+
+//    @Inject
+//    public void setCoffeeMaker(CoffeeHelper coffeeHelper, Coffee.Flavor flavor) {
+//        this.coffeeHelper = coffeeHelper;
+//        this.flavor = flavor;
+//    }
+
+//    @Inject
+//    public void setFlavor(Coffee.Flavor flavor){
+//        this.flavor = flavor;
+//    }
 
     private void withMethodInjection() {
-        CoffeeBrewer coffeeBrewer = coffeeMaker.getCoffeeBrewer(waterQuantity, flavor);
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
         coffeeBrewer.brewCoffee();
     }
 

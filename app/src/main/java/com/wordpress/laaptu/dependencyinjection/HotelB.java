@@ -64,8 +64,11 @@ public class HotelB extends AppCompatActivity {
     @Inject
     public CoffeeHelper coffeeHelper;
     private void goDagger() {
+        //Creating Dependent Component first i.e. IngredientsComponent
         IngredientsComponent ingredientsComponent = DaggerIngredientsComponent.create();
+        //Give the dependent component for proper initialization of CoffeeComponent
         CoffeeComponent coffeeComponent = DaggerCoffeeComponent.builder().ingredientsComponent(ingredientsComponent).build();
+        //Injecting the object i.e. setting coffeeHelper
         coffeeComponent.provideCoffee(this);
     }
 

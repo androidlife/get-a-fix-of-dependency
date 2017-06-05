@@ -61,19 +61,16 @@ public class RestaurantA extends BaseFragment {
     @Inject
     public CoffeeHelper coffeeHelper;
     public CoffeeComponent coffeeComponent;
+
     private void goDagger() {
         coffeeComponent = DaggerCoffeeComponent.builder().build();
-        coffeeComponent.provideCoffee(this);
     }
 
-
-
     private void withDagger() {
-        goDagger();
+        coffeeComponent.provideCoffee(this);
         CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
         coffeeBrewer.brewCoffee();
     }
-
 
     @OnClick(R.id.btn_brew_coffee)
     public void brewCoffee() {
@@ -82,6 +79,7 @@ public class RestaurantA extends BaseFragment {
 
 
     private void brewWithHelper() {
+
         CoffeeHelper coffeeHelper = new CoffeeHelper();
         CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
         coffeeBrewer.brewCoffee();

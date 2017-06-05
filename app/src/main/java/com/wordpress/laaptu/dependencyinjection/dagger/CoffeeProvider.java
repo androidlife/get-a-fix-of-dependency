@@ -21,8 +21,4 @@ public class CoffeeProvider {
         return new CoffeeHelper();
     }
 
-    @Provides
-    Water getWater(){
-        return new Water(10);
-    }
 }

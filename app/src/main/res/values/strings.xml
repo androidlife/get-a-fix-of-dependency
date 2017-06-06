@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dagger Singleton</string>
+    <string name="app_name">Dagger Singleton Life</string>
     <string name="brew_coffee">Brew %s coffee</string>
 
 </resources>

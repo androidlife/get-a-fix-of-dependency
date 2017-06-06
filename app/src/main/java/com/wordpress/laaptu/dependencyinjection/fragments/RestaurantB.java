@@ -29,7 +29,7 @@ public class RestaurantB extends BaseFragment {
     @BindView(R.id.btn_brew_coffee)
     Button btnBrewCoffee;
     //For coffee
-    int waterQuantity =10;
+    int waterQuantity = 10;
     Coffee.Flavor flavor = Coffee.Flavor.Latte;
 
     public RestaurantB() {
@@ -62,6 +62,7 @@ public class RestaurantB extends BaseFragment {
     private void goDagger() {
         coffeeComponent = DaggerCoffeeComponent.builder().build();
         coffeeComponent.provideCoffee(this);
+        coffeeComponent = null;
     }
 
     private void withDagger() {
@@ -76,10 +77,11 @@ public class RestaurantB extends BaseFragment {
 
 
     private void brewWithHelper() {
-        CoffeeHelper coffeeHelper  =new CoffeeHelper();
-        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity,flavor);
+        CoffeeHelper coffeeHelper = new CoffeeHelper();
+        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
         coffeeBrewer.brewCoffee();
     }
+
     private void brewUsual() {
         Water water = new Water(waterQuantity);
         Coffee coffee = new Coffee(flavor);

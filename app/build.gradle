@@ -15,7 +15,7 @@ android {
     }
     productFlavors {
         di {
-            applicationId applicationIdBase+'.singleton'
+            applicationId applicationIdBase+'.singletonlife'
         }
     }
 }

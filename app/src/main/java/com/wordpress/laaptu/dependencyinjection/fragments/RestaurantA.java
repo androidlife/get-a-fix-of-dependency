@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.wordpress.laaptu.dependencyinjection.HotelA;
 import com.wordpress.laaptu.dependencyinjection.R;
 import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeComponent;
 import com.wordpress.laaptu.dependencyinjection.dagger.DaggerCoffeeComponent;
@@ -32,6 +33,7 @@ public class RestaurantA extends BaseFragment {
     //For coffee
     int waterQuantity = 10;
     Coffee.Flavor flavor = Coffee.Flavor.Espresso;
+    private HotelA hotelA;
 
 
     public RestaurantA() {
@@ -55,22 +57,31 @@ public class RestaurantA extends BaseFragment {
         Timber.d("onActivityCreated()");
         txtTitle.setText("Restaurant A");
         btnBrewCoffee.setText(getString(R.string.brew_coffee, "Espresso"));
-        goDagger();
+        if (getContext() instanceof HotelA) {
+            hotelA = (HotelA) getContext();
+        }
     }
 
     @Inject
     public CoffeeHelper coffeeHelper;
-    public CoffeeComponent coffeeComponent;
-
-    private void goDagger() {
-        coffeeComponent = DaggerCoffeeComponent.builder().build();
-    }
 
     private void withDagger() {
-        coffeeComponent.provideCoffee(this);
-        CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
-        coffeeBrewer.brewCoffee();
+        if (hotelA != null) {
+            hotelA.getCoffeeComponent().provideCoffee(this);
+            hotelA.storeWeakReference(coffeeHelper);
+            CoffeeBrewer coffeeBrewer = coffeeHelper.getCoffeeBrewer(waterQuantity, flavor);
+            coffeeBrewer.brewCoffee();
+        }
     }
+
+    @Override
+    public void onDestroy() {
+        if (hotelA != null) {
+            hotelA.clearComponent();
+        }
+        super.onDestroy();
+    }
+
 
     @OnClick(R.id.btn_brew_coffee)
     public void brewCoffee() {

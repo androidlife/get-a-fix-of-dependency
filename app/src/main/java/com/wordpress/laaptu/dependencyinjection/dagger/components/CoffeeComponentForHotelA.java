@@ -19,6 +19,5 @@ import dagger.Subcomponent;
 @HotelAScope
 public interface CoffeeComponentForHotelA {
     void provideCoffeeBrewer(CafeLove cafeLove);
-
     void provideCoffeeBrewer(CafeHeart cafeHeart);
 }

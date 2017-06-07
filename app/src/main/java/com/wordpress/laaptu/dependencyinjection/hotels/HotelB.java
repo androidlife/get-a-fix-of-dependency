@@ -42,7 +42,8 @@ public class HotelB extends Hotel {
         currentCafe = COFFEE_TIME;
 
         WaterComponent waterComponent = ((MainApplication) getApplication()).getWaterComponent();
-        coffeeComponentForHotelB = waterComponent.getCoffeeComponentForHotelB(new CoffeeBrewerProvider(Coffee.Flavor.Americano));
+        coffeeComponentForHotelB = waterComponent.getCoffeeComponentForHotelB(
+                new CoffeeBrewerProvider(Coffee.Flavor.Americano));
     }
 
     @Override

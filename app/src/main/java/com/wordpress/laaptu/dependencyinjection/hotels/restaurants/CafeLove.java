@@ -25,17 +25,18 @@ public class CafeLove extends Restaurant {
         return cafeLove;
     }
 
+    @Inject
+    @Named("ForHotelA")
+    public CoffeeBrewer coffeeBrewer;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(getContext() instanceof HotelA){
-            ((HotelA)getContext()).coffeeComponentForHotelA.provideCoffeeBrewer(this);
+            ((HotelA)getContext()).coffeeComponentForHotelA.
+                    provideCoffeeBrewer(this);
         }
     }
-
-    @Inject
-    @Named("ForHotelA")
-    public CoffeeBrewer coffeeBrewer;
 
     @Override
     public void onButtonClick() {

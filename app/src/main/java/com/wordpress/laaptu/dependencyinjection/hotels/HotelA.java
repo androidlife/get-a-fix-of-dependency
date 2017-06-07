@@ -22,10 +22,7 @@ public class HotelA extends Hotel {
 
     private static final String CAFE_LOVE = "CafeLove", CAFE_HEART = "CafeHeart";
     private String currentCafe = null;
-
     public CoffeeComponentForHotelA coffeeComponentForHotelA;
-
-
     @Override
     String getHotelTitle() {
         return "Hotel A";

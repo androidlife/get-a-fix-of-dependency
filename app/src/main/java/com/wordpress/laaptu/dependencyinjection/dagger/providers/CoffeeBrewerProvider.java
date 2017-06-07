@@ -18,7 +18,6 @@ import dagger.Provides;
 public class CoffeeBrewerProvider {
 
     private Coffee.Flavor flavor;
-
     public CoffeeBrewerProvider(Coffee.Flavor flavor) {
         this.flavor = flavor;
     }

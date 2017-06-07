@@ -16,7 +16,6 @@ import dagger.Provides;
 @Module
 public class WaterProvider {
     private int waterQuantity;
-
     public WaterProvider(int waterQuantity) {
         this.waterQuantity = waterQuantity;
     }
@@ -26,6 +25,5 @@ public class WaterProvider {
     public Water getWater() {
         return new Water(waterQuantity);
     }
-
 
 }

@@ -13,6 +13,8 @@ import dagger.Component;
 @Component(modules = {WaterProvider.class})
 @Singleton
 public interface WaterComponent {
-    CoffeeComponentForHotelA getCoffeeComponentForHotelA(CoffeeBrewerProvider coffeeBrewerProvider);
-    CoffeeComponentForHotelB getCoffeeComponentForHotelB(CoffeeBrewerProvider coffeeBrewerProvider);
+    CoffeeComponentForHotelA getCoffeeComponentForHotelA(
+            CoffeeBrewerProvider coffeeBrewerProvider);
+    CoffeeComponentForHotelB getCoffeeComponentForHotelB(
+            CoffeeBrewerProvider coffeeBrewerProvider);
 }

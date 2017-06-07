@@ -8,7 +8,7 @@ import timber.log.Timber;
 
 public class Coffee {
     public enum Flavor {
-        Latte, Americano, Espresso
+        Americano, Espresso
     }
 
     public Flavor flavor = Flavor.Espresso;
@@ -20,8 +20,6 @@ public class Coffee {
 
     public String getFlavor() {
         switch (flavor) {
-            case Latte:
-                return "Latte";
             case Americano:
                 return "Americano";
             default:

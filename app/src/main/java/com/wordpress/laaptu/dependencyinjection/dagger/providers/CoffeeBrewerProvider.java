@@ -1,8 +1,12 @@
 package com.wordpress.laaptu.dependencyinjection.dagger.providers;
 
+import com.wordpress.laaptu.dependencyinjection.dagger.HotelAScope;
+import com.wordpress.laaptu.dependencyinjection.dagger.HotelBScope;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -25,7 +29,16 @@ public class CoffeeBrewerProvider {
     }
 
     @Provides
-    public CoffeeBrewer provideCoffeeBrewer(Water water, Coffee coffee) {
+    @Named("ForHotelA")
+    @HotelAScope
+    public CoffeeBrewer provideCoffeeBrewerForHotelA(Water water, Coffee coffee) {
+        return new CoffeeBrewer(water, coffee);
+    }
+
+    @Provides
+    @Named("ForHotelB")
+    @HotelBScope
+    public CoffeeBrewer provideCoffeeBrewerForHotelB(Water water, Coffee coffee) {
         return new CoffeeBrewer(water, coffee);
     }
 }

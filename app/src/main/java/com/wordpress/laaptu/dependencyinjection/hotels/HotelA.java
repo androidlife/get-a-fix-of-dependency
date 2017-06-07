@@ -4,9 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.wordpress.laaptu.dependencyinjection.MainApplication;
 import com.wordpress.laaptu.dependencyinjection.R;
+import com.wordpress.laaptu.dependencyinjection.dagger.components.CoffeeComponentForHotelA;
+import com.wordpress.laaptu.dependencyinjection.dagger.components.WaterComponent;
+import com.wordpress.laaptu.dependencyinjection.dagger.providers.CoffeeBrewerProvider;
 import com.wordpress.laaptu.dependencyinjection.hotels.restaurants.CafeHeart;
 import com.wordpress.laaptu.dependencyinjection.hotels.restaurants.CafeLove;
+import com.wordpress.laaptu.dependencyinjection.menu.coffee.Coffee;
+import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
 import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
 
 import javax.inject.Inject;
@@ -17,8 +23,8 @@ public class HotelA extends Hotel {
     private static final String CAFE_LOVE = "CafeLove", CAFE_HEART = "CafeHeart";
     private String currentCafe = null;
 
-    @Inject @Named("HotelAScope")
-    Water water;
+    public CoffeeComponentForHotelA coffeeComponentForHotelA;
+
 
     @Override
     String getHotelTitle() {
@@ -34,10 +40,15 @@ public class HotelA extends Hotel {
                 R.id.container, CafeLove.getInstance(), CAFE_LOVE).commit();
         currentCafe = CAFE_LOVE;
 
-
+        WaterComponent waterComponent = ((MainApplication) getApplication()).getWaterComponent();
+        coffeeComponentForHotelA = waterComponent.getCoffeeComponentForHotelA(new CoffeeBrewerProvider(Coffee.Flavor.Espresso));
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        coffeeComponentForHotelA = null;
+    }
 
     @Override
     public void changeHotel() {
@@ -63,7 +74,6 @@ public class HotelA extends Hotel {
             ).commit();
         }
     }
-
 
 
 }

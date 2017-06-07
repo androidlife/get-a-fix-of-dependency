@@ -22,16 +22,10 @@ public class WaterProvider {
     }
 
     @Provides
-    @Named("Singleton")
     @Singleton
-    public Water provideWater() {
+    public Water getWater() {
         return new Water(waterQuantity);
     }
 
-    @Provides
-    @Named("HotelAScope")
-    @HotelAScope
-    public Water providerWater(){
-        return new Water(waterQuantity);
-    }
+
 }

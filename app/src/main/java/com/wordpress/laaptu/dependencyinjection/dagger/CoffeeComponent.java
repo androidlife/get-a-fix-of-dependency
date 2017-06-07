@@ -11,7 +11,7 @@ import dagger.Component;
 /**
  * Created by laaptu on 4/28/17.
  */
-@Singleton
+@CustomScope
 @Component(modules = {CoffeeProvider.class})
 public interface CoffeeComponent {
     void provideCoffee(RestaurantA restaurantA);

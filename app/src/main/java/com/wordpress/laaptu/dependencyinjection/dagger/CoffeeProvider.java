@@ -15,7 +15,7 @@ import dagger.Provides;
 @Module
 public class CoffeeProvider {
 
-    @Singleton
+    @CustomScope
     @Provides
     CoffeeHelper getCoffeeHelper() {
         return new CoffeeHelper();

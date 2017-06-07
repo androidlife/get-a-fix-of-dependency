@@ -1,11 +1,8 @@
 package com.wordpress.laaptu.dependencyinjection.dagger.components;
 
-import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeProvider;
 import com.wordpress.laaptu.dependencyinjection.dagger.providers.CoffeeBrewerProvider;
 import com.wordpress.laaptu.dependencyinjection.dagger.providers.WaterProvider;
 
-import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantA;
-import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantB;
 import dagger.Component;
 
 /**

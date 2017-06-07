@@ -1,15 +1,9 @@
 package com.wordpress.laaptu.dependencyinjection.dagger.components;
 
-import com.wordpress.laaptu.dependencyinjection.HotelB;
-import com.wordpress.laaptu.dependencyinjection.dagger.CoffeeProvider;
 import com.wordpress.laaptu.dependencyinjection.dagger.providers.CoffeeBrewerProvider;
-import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantA;
-import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantB;
-import com.wordpress.laaptu.dependencyinjection.menu.coffee.CoffeeBrewer;
+import com.wordpress.laaptu.dependencyinjection.hotels.restaurants.CafeLove;
+import com.wordpress.laaptu.dependencyinjection.hotels.restaurants.CafeHeart;
 
-import javax.inject.Singleton;
-
-import dagger.Component;
 import dagger.Subcomponent;
 
 /**
@@ -18,6 +12,6 @@ import dagger.Subcomponent;
 
 @Subcomponent(modules = {CoffeeBrewerProvider.class})
 public interface CoffeeComponent {
-    void provideCoffeeBrewer(RestaurantA restaurantA);
-    void provideCoffeeBrewer(RestaurantB restaurantB);
+    void provideCoffeeBrewer(CafeLove cafeLove);
+    void provideCoffeeBrewer(CafeHeart cafeHeart);
 }

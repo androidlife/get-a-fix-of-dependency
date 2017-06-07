@@ -1,8 +1,6 @@
 package com.wordpress.laaptu.dependencyinjection.dagger;
 
-import com.wordpress.laaptu.dependencyinjection.HotelB;
-import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantA;
-import com.wordpress.laaptu.dependencyinjection.fragments.RestaurantB;
+import com.wordpress.laaptu.dependencyinjection.hotels.HotelB;
 
 import javax.inject.Singleton;
 

@@ -36,7 +36,7 @@ public abstract class Restaurant extends Fragment {
     @BindView(R.id.txt_info)
     TextView txtInfo;
 
-    private String dateFormat = "'at' hh:mm aaa 'on' d MMM yyyy ',' EEE";
+    private String dateFormat = "'at' hh:mm:ss aaa 'on' d MMM yyyy ',' EEE";
     private SimpleDateFormat simpleDateFormat;
     private String flavor;
 
@@ -70,7 +70,7 @@ public abstract class Restaurant extends Fragment {
 
     @OnClick(R.id.btn_brew_coffee)
     public void onButtonClick() {
-
+            updateCoffeeBrewingInfo();
     }
 
     public void updateCoffeeBrewingInfo() {

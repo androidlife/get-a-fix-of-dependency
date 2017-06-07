@@ -7,11 +7,18 @@ import android.support.v4.app.Fragment;
 import com.wordpress.laaptu.dependencyinjection.R;
 import com.wordpress.laaptu.dependencyinjection.hotels.restaurants.CafeHeart;
 import com.wordpress.laaptu.dependencyinjection.hotels.restaurants.CafeLove;
+import com.wordpress.laaptu.dependencyinjection.menu.coffee.Water;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 public class HotelA extends Hotel {
 
     private static final String CAFE_LOVE = "CafeLove", CAFE_HEART = "CafeHeart";
     private String currentCafe = null;
+
+    @Inject @Named("HotelAScope")
+    Water water;
 
     @Override
     String getHotelTitle() {
@@ -26,7 +33,11 @@ public class HotelA extends Hotel {
         getSupportFragmentManager().beginTransaction().replace(
                 R.id.container, CafeLove.getInstance(), CAFE_LOVE).commit();
         currentCafe = CAFE_LOVE;
+
+
     }
+
+
 
     @Override
     public void changeHotel() {
